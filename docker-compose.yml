@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: users
+    volumes:
+      - ./server/mongo-initdb:/docker-entrypoint-initdb.d/
+      # 2 volumes are defined in mongo image, if you don't use either of them, it will be anonymous
+      - mongo:/data/db
+      - /data/configdb:/data/configdb
+    networks:
+      - bridge_network
+
+  server:
+    build: ./server
+    container_name: server
+    ports:
+      - 8080:8080
+    environment:
+      WAIT_HOSTS: mongo:27017
+      MONGO_CONN: admin:password@mongo:27017
+    depends_on:
+      - mongo
+    networks:
+      - bridge_network
+
+  client:
+    build: ./client
+    container_name: client
+    ports:
+      - 3000:3000
+    environment:
+      - WAIT_HOSTS=server:8080
+    depends_on:
+      - server
+    networks:
+      - bridge_network
+
+networks:
+  bridge_network:
+    driver: bridge
+
+volumes:
+  mongo:
