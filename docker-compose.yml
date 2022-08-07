@@ -38,6 +38,7 @@ services:
       - 3000:3000
     environment:
       - WAIT_HOSTS=server:8080
+      - SERVER_URL="http://server:8080"
     depends_on:
       - server
     networks:
