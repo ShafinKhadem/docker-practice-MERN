@@ -13,6 +13,17 @@
 
 ### Notes
 
-Use `alias compose-up="docker-compose pull && docker-compose up -d --build"`. Without pull, latest tagged image may not actually be latest and without --build, compose will use your previous built image even if your Dockerfile has changed.
+To access host machine's ports from container, add the followingin docker-compose.yml:
+```yml
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      # Access host machine's localhost using host.docker.internal
+```
+
+SERVER_HOST has to be 0.0.0.0 to listen to requests from outside container.
+
+Use `alias compose-up="docker-compose pull && docker-compose up -d --build --remove-orphans"`. Without pull, latest tagged image may not actually be latest and without --build, compose will use your previous built image even if your Dockerfile has changed.
+
+At each step, docker build doesn't use cache if any of the workdir files have changed since last build.
 
 https://docs.docker.com/compose/compose-file/#extension && https://www.educative.io/blog/advanced-yaml-syntax-cheatsheet
