@@ -24,6 +24,8 @@ SERVER_HOST has to be 0.0.0.0 to listen to requests from outside container.
 
 Use `alias compose-up="docker-compose pull && docker-compose up -d --build --remove-orphans"`. Without pull, latest tagged image may not actually be latest and without --build, compose will use your previous built image even if your Dockerfile has changed.
 
-At each step, docker build doesn't use cache if any of the workdir files have changed since last build.
+At each step, docker build doesn't use cache if any of the workdir files or previous steps have changed since last build.
+
+Docker logs are line-buffered. So if a command prints without newline, you may not be able to see it in docker logs. For same reason, can't see progress bars of `pip install`.
 
 https://docs.docker.com/compose/compose-file/#extension && https://www.educative.io/blog/advanced-yaml-syntax-cheatsheet
