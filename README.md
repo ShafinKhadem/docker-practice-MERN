@@ -24,6 +24,8 @@ SERVER_HOST has to be 0.0.0.0 to listen to requests from outside container.
 
 Docker logs are line-buffered. So if a command prints without newline, you may not be able to see it in docker logs. For same reason, can't see progress bars of `pip install`.
 
+You can create overlapping local to remote mounts: https://stackoverflow.com/questions/50238503/overlapping-bind-mounts-and-permissions-in-docker-on-linux
+
 To prevent docker with background processes from shutting down, add `CMD tail -f /dev/null`
 
 Use `alias compose-up="docker-compose pull && docker-compose up -d --build --remove-orphans"`. Without pull, latest tagged image may not actually be latest and without --build, compose will use your previous built image even if your Dockerfile has changed.
