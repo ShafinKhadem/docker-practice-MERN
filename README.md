@@ -13,6 +13,8 @@
 
 ### Notes
 
+`COPY ./src ./` copies the contents of `./src` (not the folder itself) to workdir. In most cases, you want to do `COPY ./src ./src`.
+
 To access host machine's ports from container, add the followingin docker-compose.yml:
 ```yml
     extra_hosts:
