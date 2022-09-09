@@ -32,6 +32,8 @@ To prevent docker with background processes from shutting down, add `CMD tail -f
 
 Use `alias compose-up="docker-compose pull && docker-compose up -d --build --remove-orphans"`. Without pull, latest tagged image may not actually be latest and without --build, compose will use your previous built image even if your Dockerfile has changed.
 
+Also use `alias docker-ps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"'`
+
 At each step, docker build doesn't use cache if any of the workdir files or previous steps have changed since last build. Use [RUN --mount=type=cache,target=/root/.cache](https://docs.docker.com/engine/reference/builder/#run---mounttypecache) for dependency installation commands to persist dependency caches across builds.
 
 https://docs.docker.com/compose/compose-file/#extension && https://www.educative.io/blog/advanced-yaml-syntax-cheatsheet
