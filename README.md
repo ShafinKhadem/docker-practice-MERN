@@ -13,9 +13,11 @@
 
 ### Notes
 
-`COPY ./src ./` copies the contents of `./src` (not the folder itself) to workdir. In most cases, you want to do `COPY ./src ./src`.
+Most frontend frameworks won't pass all environment variables to browser runtime. Only variables with specific name format (e.g. prefix by `REACT_APP_` for react) will be passed.
 
-To access host machine's ports from container, add the followingin docker-compose.yml:
+`COPY ./src .` copies the contents of `./src` (not the folder itself) to workdir. In most cases, you want to do `COPY ./src ./src`.
+
+To access host machine's ports from container, add the following in docker-compose.yml:
 ```yml
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -26,7 +28,7 @@ SERVER_HOST has to be 0.0.0.0 to listen to requests from outside container.
 
 Docker logs are line-buffered. So if a command prints without newline, you may not be able to see it in docker logs. For same reason, can't see progress bars of `pip install`.
 
-From inside a container process, docker's stdout can be accessed by `/proc/1/fd/1` and stderr can be accessed by `/proc/1/fd/2`. So, for seeing output of a cron, use `* * * * * printf "[$(date -Iseconds)]\t$(curl -s polling:8090)\n" > /proc/1/fd/1 2>/proc/1/fd/2`.
+From inside a container process, docker's stdout can be accessed by `/proc/1/fd/1` and stderr can be accessed by `/proc/1/fd/2`. So, for seeing output of a cron, use `* * * * * printf "[$(date -Iseconds)]\t$(curl -s polling:8090)\n" > /proc/1/fd/1 2>/proc/1/fd/2`. **`%` has to be escaped in crontab`.**
 
 You can create overlapping local to remote mounts: https://stackoverflow.com/questions/50238503/overlapping-bind-mounts-and-permissions-in-docker-on-linux
 
