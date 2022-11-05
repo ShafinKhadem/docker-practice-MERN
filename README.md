@@ -17,6 +17,8 @@ Most frontend frameworks won't pass all environment variables to browser runtime
 
 `COPY ./src .` copies the contents of `./src` (not the folder itself) to workdir. In most cases, you want to do `COPY ./src ./src`.
 
+User `USER root` in Dockerfile unless default user (from base) is root.
+
 To access host machine's ports from container, add the following in docker-compose.yml:
 ```yml
     extra_hosts:
