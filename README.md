@@ -19,7 +19,7 @@ Most frontend frameworks won't pass all environment variables to browser runtime
 
 User `USER root` in Dockerfile unless default user (from base) is root.
 
-To access host machine's ports from container, add the following in docker-compose.yml:
+To access host machine's ports from container, add the following in docker-compose.yml (non-compose containers run using `docker run` automatically get this):
 ```yml
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -45,3 +45,5 @@ At each step, docker build doesn't use cache if any of the workdir files or prev
 https://docs.docker.com/compose/compose-file/#extension && https://www.educative.io/blog/advanced-yaml-syntax-cheatsheet
 
 If you just need to change the entrypoint from an image, directly do it in docker-compose using `command: ` instead of creating a separate Dockerfile.
+
+Connect multiple compose projects using https://docs.docker.com/compose/compose-file/06-networks/#external , connect remote compose project's network using https://code.visualstudio.com/docs/containers/ssh (`docker context create my-remote-docker-machine --docker "host=ssh://username@host:port"`)
