@@ -46,4 +46,4 @@ https://docs.docker.com/compose/compose-file/#extension && https://www.educative
 
 If you just need to change the entrypoint from an image, directly do it in docker-compose using `command: ` instead of creating a separate Dockerfile.
 
-Connect multiple compose projects using https://docs.docker.com/compose/compose-file/06-networks/#external , connect remote compose project's network using https://code.visualstudio.com/docs/containers/ssh (`docker context create my-remote-docker-machine --docker "host=ssh://username@host:port"`)
+Connect multiple compose projects using https://docs.docker.com/compose/compose-file/06-networks/#external , connect remote compose project's network using https://code.visualstudio.com/docs/containers/ssh (`docker context create my-remote-docker-machine --docker "host=ssh://username@host:port"`). :caution: **Caution** Don't forget to revert the docker context to default. As long as you're in a remote machine's docker context, all mappings (port / volume) will work in the remote machine's context. This is often a deal-breaker as it can't support hot-reloading.
