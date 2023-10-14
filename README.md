@@ -15,7 +15,9 @@
 
 Most frontend frameworks won't pass all environment variables to browser runtime. Only variables with specific name format (e.g. prefix by `REACT_APP_` for react) will be passed.
 
-`COPY ./src .` copies the contents of `./src` (not the folder itself) to workdir. In most cases, you want to do `COPY ./src ./src`.
+`COPY ./src .` copies the contents of `./src` (not the folder itself) to workdir. In most cases, you want to do `COPY ./src ./src`. (https://stackoverflow.com/a/30316600)
+
+If volume mounting file, ensure that it exists in both sides, otherwise docker create a directory instead of a file (https://stackoverflow.com/a/64821508)
 
 User `USER root` in Dockerfile unless default user (from base) is root.
 
