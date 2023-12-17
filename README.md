@@ -28,6 +28,8 @@ To access host machine's ports from container, add the following in docker-compo
       # Access host machine's localhost using host.docker.internal
 ```
 
+Pass environment variables to docker run command: https://stackoverflow.com/a/46547817
+
 SERVER_HOST has to be 0.0.0.0 to listen to requests from outside container.
 
 Docker logs are line-buffered. So if a command prints without newline, you may not be able to see it in docker logs. For same reason, can't see progress bars of `pip install`.
