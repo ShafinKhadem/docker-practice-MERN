@@ -46,7 +46,7 @@ Also use `alias docker-ps='docker ps --format "table {{.Names}}\t{{.RunningFor}}
 
 At each step, docker build doesn't use cache if any of the workdir files or previous steps have changed since last build. Use [RUN --mount=type=cache,target=/root/.cache](https://docs.docker.com/engine/reference/builder/#run---mounttypecache) for dependency installation commands to persist dependency caches across builds.
 
-https://docs.docker.com/compose/compose-file/#extension && https://www.educative.io/blog/advanced-yaml-syntax-cheatsheet
+https://docs.docker.com/compose/compose-file/#extension && https://www.educative.io/blog/advanced-yaml-syntax-cheatsheet && https://docs.docker.com/build/building/secrets/
 
 If you just need to change the entrypoint from an image, directly do it in docker-compose using `command: ` instead of creating a separate Dockerfile.
 
